@@ -103,6 +103,8 @@ beta1 <- sum(yc * xc) / sum(xc ^ 2)
 c(beta1, coef(lm(y ~ x))[2])
 ```
 
+Note: lm(y ~ x - 1) omits intercept, and we can expect lm(yc ~ xc) is equivalent to lm(yc ~ xc - 1)
+
 ---
 ## Revisiting Galton's data
 ### Normalizing variables results in the slope being the correlation
@@ -115,7 +117,7 @@ c(cor(y, x), cor(yn, xn), coef(lm(yn ~ xn))[2])
 ---
 ```{r, fig.height=6,fig.width=6,echo=FALSE}
 g <- ggplot(filter(freqData, freq > 0), aes(x = parent, y = child))
-g <- g  + scale_size(range = c(2, 20), guide = "none" )
+g <- g + scale_size(range = c(2, 20), guide = "none" )
 g <- g + geom_point(colour="grey50", aes(size = freq+20, show_guide = FALSE))
 g <- g + geom_point(aes(colour=freq, size = freq))
 g <- g + scale_colour_gradient(low = "lightblue", high="white")  
